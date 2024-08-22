@@ -1,0 +1,97 @@
+p {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000000;
+    text-align: center;
+}
+
+body {
+  background-color: rgb(240, 240, 240)
+}
+
+
+h1 {
+    font-size: 40px;
+    font-weight: bold;
+    color: #000000;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* SideBar */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+  
+  .top-bar {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .menu-btn {
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+  }
+  
+  .sidebar {
+    height: 100%;
+    width: rgb(0, 0, 0);
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #333;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 50px;
+  }
+  
+  .sidebar a {
+    padding: 10px 25px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidebar a:hover {
+    background-color: #575757;
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    font-size: 30px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }  
+  
+  .content {
+    padding: 16px;
+  }
+  
+  @media (max-height: 450px) {
+    .sidebar { padding-top: 15px; }
+    .sidebar a { font-size: 18px; }
+  }
+  
+  /* End of SideBar */
