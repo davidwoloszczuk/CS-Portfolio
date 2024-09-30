@@ -6,3 +6,9 @@ function toggleSidebar() {
       sidebar.style.width = '250px';
   }
 }
+
+
+
+
+
+
