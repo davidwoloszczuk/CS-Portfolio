@@ -19,6 +19,11 @@ h1 {
     margin-bottom: 20px;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+
 /* SideBar */
 
 body {
@@ -49,7 +54,7 @@ body {
   
   .sidebar {
     height: 100%;
-    width: rgb(0, 0, 0);
+    width: 0;
     position: fixed;
     top: 0;
     left: 0;
