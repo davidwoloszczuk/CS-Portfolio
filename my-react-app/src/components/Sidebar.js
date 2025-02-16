@@ -1,5 +1,6 @@
+// filepath: /c:/Users/david/CS-Portfolio/CS-Portfolio/my-react-app/src/components/Sidebar.js
+
 import React from 'react';
-import './Sidebar.css'; // Import any CSS for the sidebar
 
 const Sidebar = () => {
   return (
@@ -9,4 +10,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar; 
+export default Sidebar;
