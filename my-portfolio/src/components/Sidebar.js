@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/Sidebar.css';
 
 function Sidebar() {
@@ -8,13 +9,13 @@ function Sidebar() {
     setIsOpen(!isOpen);
   };
 
-  const handleClickOutside = (event) => {
-    if (isOpen && !event.target.closest('.sidebar') && !event.target.closest('.toggle-button')) {
-      setIsOpen(false);
-    }
-  };
-
   useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isOpen && !event.target.closest('.sidebar') && !event.target.closest('.toggle-button')) {
+        setIsOpen(false);
+      }
+    };
+
     document.addEventListener('click', handleClickOutside);
     return () => {
       document.removeEventListener('click', handleClickOutside);
@@ -29,9 +30,10 @@ function Sidebar() {
       <div className={`sidebar ${isOpen ? 'open' : ''}`}>
         <h2>My Portfolio</h2>
         <ul>
-          <li><button onClick={() => document.getElementById('about-me').scrollIntoView()}>About Me</button></li>
-          <li><button onClick={() => document.getElementById('projects').scrollIntoView()}>Projects</button></li>
-          <li><button onClick={() => document.getElementById('contact').scrollIntoView()}>Contact</button></li>
+          <li><Link to="/" onClick={toggleSidebar}>Home</Link></li>
+          <li><Link to="/about-me" onClick={toggleSidebar}>About Me</Link></li>
+          <li><Link to="/projects" onClick={toggleSidebar}>Projects</Link></li>
+          <li><Link to="/contact" onClick={toggleSidebar}>Contact</Link></li>
         </ul>
         <div className="bottom-buttons">
           <button className="extras-button">Extras</button>
