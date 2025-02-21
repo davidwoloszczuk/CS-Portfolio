@@ -5,12 +5,13 @@
   color: white;
   position: fixed;
   top: 0;
-  left: -250px; /* Initially hidden */
+  left: -250px; /* Adjusted to hide the sidebar completely when closed */
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 10px; /* Adjusted padding-top */
   transition: left 0.3s ease;
+  z-index: 1000; /* Ensure it is above other elements */
 }
 
 .sidebar.open {
@@ -59,7 +60,7 @@
   border: none;
   font-size: 24px;
   cursor: pointer;
-  z-index: 1000; /* Ensure it is above other elements */
+  z-index: 1001; /* Ensure it is above the sidebar */
 }
 
 .toggle-button:hover {
