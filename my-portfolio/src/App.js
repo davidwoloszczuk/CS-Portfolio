@@ -6,6 +6,8 @@ import Sidebar from './components/Sidebar';
 import AboutMe from './pages/AboutMe';
 import Contact from './pages/Contact';
 import Projects from './pages/Projects';
+import Extras from './pages/Extras';
+import Settings from './pages/Settings';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
             <Route path="/about-me" element={<AboutMe />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/extras" element={<Extras />} />
+            <Route path="/settings" element={<Settings />} />
             <Route path="/" element={
               <div>
                 <h1>Welcome to My Portfolio</h1>

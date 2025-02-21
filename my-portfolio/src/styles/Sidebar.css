@@ -85,6 +85,7 @@
   text-align: center;
   width: 40%; /* Adjusted width to fit within the sidebar */
   margin: 0 5%; /* Add margin to center the buttons */
+  text-decoration: none; /* Ensure the buttons look like links */
 }
 
 .extras-button:hover, .settings-button:hover {

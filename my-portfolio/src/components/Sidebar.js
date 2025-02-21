@@ -36,11 +36,11 @@ function Sidebar() {
           <li><Link to="/contact" onClick={toggleSidebar}>Contact</Link></li>
         </ul>
         <div className="bottom-buttons">
-          <button className="extras-button">Extras</button>
-          <button className="settings-button">
+          <Link to="/extras" className="extras-button" onClick={toggleSidebar}>Extras</Link>
+          <Link to="/settings" className="settings-button" onClick={toggleSidebar}>
             <i className="fas fa-cog"></i>
             <span className="tooltip">Settings</span>
-          </button>
+          </Link>
         </div>
       </div>
     </>
