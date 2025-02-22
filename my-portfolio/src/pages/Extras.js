@@ -1,10 +1,11 @@
 import React from 'react';
+import Packman from '../components/Packman';
 
 function Extras() {
   return (
     <div id="extras">
       <h1>Extras</h1>
-      <p>This is the Extras page.</p>
+      <Packman />
     </div>
   );
 }
