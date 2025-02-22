@@ -19,9 +19,8 @@ const Packman = () => {
     const initialPacmanY = 23;
     const [pacmanX, setPacmanX] = useState(initialPacmanX);
     const [pacmanY, setPacmanY] = useState(initialPacmanY);
-    const [nextDirection, setNextDirection] = useState(null); // Use for storing the next direction
+    const [nextDirection, setNextDirection] = useState(null);
 
-    // More accurate maze representation (partial)
     const initialMaze = [
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
@@ -34,34 +33,42 @@ const Packman = () => {
     ];
     const [maze, setMaze] = useState(initialMaze);
 
-    const canvasRef = useRef(null); // Ref for the canvas element
+    const canvasRef = useRef(null);
 
     useEffect(() => {
-        const canvas = canvasRef.current; // Get canvas using the ref
+        const canvas = canvasRef.current;
         const context = canvas.getContext('2d');
 
-        // Set canvas dimensions (adjust as needed)
         canvas.width = tileCount * gridSize;
         canvas.height = tileCount * gridSize;
 
         const drawMaze = () => {
+            if (!context) return;
+
             for (let y = 0; y < maze.length; y++) {
                 for (let x = 0; x < maze[y].length; x++) {
-                    if (maze[y][x] === 1) {
-                        context.fillStyle = '#003399'; // Original Pac-Man blue
-                        context.fillRect(x * gridSize, y * gridSize, gridSize, gridSize);
-                    } else if (maze[y][x] === 2) {
+                    const cell = maze[y][x];
+                    const drawX = x * gridSize;
+                    const drawY = y * gridSize;
+
+                    if (cell === 1) {
+                        context.fillStyle = '#003399';
+                        context.fillRect(drawX, drawY, gridSize, gridSize);
+                    } else if (cell === 2) {
                         context.fillStyle = 'white';
                         context.beginPath();
-                        context.arc(x * gridSize + gridSize / 2, y * gridSize + gridSize / 2, gridSize / 6, 0, 2 * Math.PI);
+                        context.arc(drawX + gridSize / 2, drawY + gridSize / 2, gridSize / 6, 0, 2 * Math.PI);
                         context.fill();
+                    } else {
+                        context.fillStyle = 'black';
+                        context.fillRect(drawX, drawY, gridSize, gridSize);
                     }
                 }
             }
         };
 
         const drawPacman = () => {
-            context.fillStyle = 'yellow'; // Original Pac-Man yellow
+            context.fillStyle = 'yellow';
             context.beginPath();
             let angleStart = 0;
             let angleEnd = 2 * Math.PI;
@@ -95,10 +102,9 @@ const Packman = () => {
                 if (newY < 0) newY = tileCount - 1;
                 if (newY > tileCount - 1) newY = 0;
 
-                context.fillStyle = ghost.color; // Use ghost's color
+                context.fillStyle = ghost.color;
                 context.fillRect(newX * gridSize, newY * gridSize, gridSize - 2, gridSize - 2);
 
-                // Collision detection
                 if (pacmanX === newX && pacmanY === newY) {
                     setLives(prevLives => prevLives - 1);
                     if (lives <= 1) {
@@ -115,7 +121,7 @@ const Packman = () => {
         const resetPacman = () => {
             setPacmanX(initialPacmanX);
             setPacmanY(initialPacmanY);
-            setNextDirection(null); // Reset direction
+            setNextDirection(null);
         };
 
         const gameLoop = () => {
@@ -141,13 +147,11 @@ const Packman = () => {
                 newY += 1;
             }
 
-            // Boundary and wall collision detection
             if (newX >= 0 && newX < tileCount && newY >= 0 && newY < tileCount && maze[newY] && maze[newY][newX] !== 1) {
                 setPacmanX(newX);
                 setPacmanY(newY);
 
                 if (maze[newY][newX] === 2) {
-                    // Eat pellet
                     const newMaze = maze.map((row, y) =>
                         row.map((cell, x) => (x === newX && y === newY ? 0 : cell))
                     );
@@ -156,9 +160,7 @@ const Packman = () => {
                 }
             }
 
-            context.fillStyle = 'black';
-            context.fillRect(0, 0, canvas.width, canvas.height);
-
+            context.clearRect(0, 0, canvas.width, canvas.height);
             drawMaze();
             drawPacman();
             drawGhosts();
@@ -170,16 +172,16 @@ const Packman = () => {
 
         const keyDownHandler = (event) => {
             switch (event.keyCode) {
-                case 37: // Left
+                case 37:
                     setNextDirection('left');
                     break;
-                case 38: // Up
+                case 38:
                     setNextDirection('up');
                     break;
-                case 39: // Right
+                case 39:
                     setNextDirection('right');
                     break;
-                case 40: // Down
+                case 40:
                     setNextDirection('down');
                     break;
                 default:
@@ -188,11 +190,11 @@ const Packman = () => {
         };
 
         document.addEventListener('keydown', keyDownHandler);
-        const intervalRef = setInterval(gameLoop, 100); // Store interval in ref
+        const intervalRef = setInterval(gameLoop, 100);
 
         return () => {
             document.removeEventListener('keydown', keyDownHandler);
-            clearInterval(intervalRef); // Clear interval using ref
+            clearInterval(intervalRef);
         };
     }, [score, highScore, ghosts, pacmanX, pacmanY, nextDirection, maze, lives, gameOver, tileCount, gridSize]);
 
@@ -219,7 +221,7 @@ const Packman = () => {
                 <div>Score: {score}</div>
                 <div>Lives: {lives}</div>
             </div>
-            <canvas id="pacman" width="560" height="560" ref={canvasRef}></canvas> {/* Use the ref */}
+            <canvas id="pacman" width="560" height="560" ref={canvasRef}></canvas>
             {gameOver && (
                 <button onClick={resetGame}>Try Again</button>
             )}
